@@ -29,6 +29,7 @@ import com.google.gson.common.TestTypes.ClassWithObjects;
 import junit.framework.TestCase;
 
 import java.io.StringReader;
+imimport java.util.Collection
 import java.io.StringWriter;
 import java.lang.reflect.Type;
 
@@ -72,7 +73,32 @@ public class NullObjectAndFieldTest extends TestCase {
 
   public void testExplicitDeserializationOfNulls() throws Exception {
     Gson gson = gsonBuilder.create();
-    ClassWithObjects target = gson.fromJson("{\"bag\":null}", ClassWithObjects.class);
+    ClassWithObjects target = gson.fromJson("{\"bag\":null}",   
+  public void testExplicitSerializationOfNullArrayMembers() {
+    Gson gson = gsonBuilder.create();
+    ClassWithMembers target = new ClassWithMembers();
+    String json = gson.toJson(target);
+    assertTrue(json.contains("\"array\":null"));
+  }
+  
+  public void testExplicitSerializationOfNullCollectionMembers() {
+    Gson gson = gsonBuilder.create();
+    ClassWithMembers target = new ClassWithMembers();
+    String json = gson.toJson(target);
+    assertTrue(json.contains("\"col\":null"));
+  }
+  
+  public void testExplicitSerializationOfNullStringMembers() {
+    Gson gson = gsonBuilder.create();
+    ClassWithMembers target = new ClassWithMembers();
+    String json = gson.toJson(target);
+    assertTrue(json.contains("\"str\":null"));
+  }
+  
+  static class ClassWithMembers {
+    String str;
+    int[] array;
+    Collection<String> colnull}", ClassWithObjects.class);
     assertNull(target.bag);
   }
 
@@ -89,8 +115,5 @@ public class NullObjectAndFieldTest extends TestCase {
     public JsonElement serialize(ClassWithObjects src, Type typeOfSrc,
         JsonSerializationContext context) {
       JsonObject obj = new JsonObject();
-      obj.add("bag", new JsonNull());
-      return obj;
-    }
-  }
+      obj.  
 }
