@@ -81,6 +81,30 @@ public class NullObjectAndFieldTest extends TestCase {
     assertTrue(json.contains("\"array\":null"));
   }
   
+  /** 
+   * Added to verify http://code.google.com/p/google-gson/issues/detail?id=68
+   */
+  public void testNullWrappedPrimitiveMemberSerialization() {
+    Gson gson = gsonBuilder.serializeNulls().create();
+    ClassWithNullWrappedPrimitive target = new ClassWithNullWrappedPrimitive();
+    String json = gson.toJson(target);
+    assertTrue(json.contains("\"value\":null"));
+  }
+  
+  /** 
+   * Added to verify http://code.google.com/p/google-gson/issues/detail?id=68
+   */
+  public void testNullWrappedPrimitiveMemberDeserialization() {
+    Gson gson = gsonBuilder.create();
+    String json = "{'value':null}";
+    ClassWithNullWrappedPrimitive target = gson.fromJson(json, ClassWithNullWrappedPrimitive.class);
+    assertNull(target.value);
+  }
+  
+  private static class ClassWithNullWrappedPrimitive {
+    private Long value;
+  }
+  
   public void testExplicitSerializationOfNullCollectionMembers() {
     Gson gson = gsonBuilder.create();
     ClassWithMembers target = new ClassWithMembers();
@@ -115,5 +139,4 @@ public class NullObjectAndFieldTest extends TestCase {
     public JsonElement serialize(ClassWithObjects src, Type typeOfSrc,
         JsonSerializationContext context) {
       JsonObject obj = new JsonObject();
-      obj.  
-}
+      obj.}
