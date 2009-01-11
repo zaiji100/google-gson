@@ -101,10 +101,6 @@ public class NullObjectAndFieldTest extends TestCase {
     assertNull(target.value);
   }
   
-  private static class ClassWithNullWrappedPrimitive {
-    private Long value;
-  }
-  
   public void testExplicitSerializationOfNullCollectionMembers() {
     Gson gson = gsonBuilder.create();
     ClassWithMembers target = new ClassWithMembers();
@@ -118,11 +114,7 @@ public class NullObjectAndFieldTest extends TestCase {
     String json = gson.toJson(target);
     assertTrue(json.contains("\"str\":null"));
   }
-  
-  static class ClassWithMembers {
-    String str;
-    int[] array;
-    Collection<String> colnull}", ClassWithObjects.class);
+ClassWithObjects.class);
     assertNull(target.bag);
   }
 
@@ -131,7 +123,37 @@ public class NullObjectAndFieldTest extends TestCase {
     Gson gson = gsonBuilder.create();
     ClassWithObjects target = new ClassWithObjects(new BagOfPrimitives());
     String actual = gson.toJson(target);
-    String expected = "{\"bag\":null}";
+    String expected = "  
+  public void testPrintPrintingObjectWithNulls() throws Exception {
+    gsonBuilder = new GsonBuilder();
+    Gson gson = gsonBuilder.setPrettyPrinting().create();
+    String result = gson.toJson(new ClassWithMembers());
+    assertEquals("{}\n", result);
+
+    gson = gsonBuilder.serializeNulls().create();
+    result = gson.toJson(new ClassWithMembers());
+    assertTrue(result.contains("\"str\":null"));
+  }
+  
+  public void testPrintPrintingArraysWithNulls() throws Exception {
+    gsonBuilder = new GsonBuilder();
+    Gson gson = gsonBuilder.setPrettyPrinting().create();
+    String result = gson.toJson(new String[] { "1", null, "3" });
+    assertEquals("[\"1\",null,\"3\"]\n", result);
+
+    gson = gsonBuilder.serializeNulls().create();
+    result = gson.toJson(new String[] { "1", null, "3" });
+    assertEquals("[\"1\",null,\"3\"]\n", result);
+  }
+
+  private static class ClassWithNullWrappedPrimitive {
+    private Long value;
+  }
+
+  private static class ClassWithMembers {
+    String str;
+    int[] array;
+    Collection<String> colnull}",   {\"bag\":null}";
     assertEquals(expected, actual);
   }
 
