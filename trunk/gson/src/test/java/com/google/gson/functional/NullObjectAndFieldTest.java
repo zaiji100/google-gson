@@ -152,9 +152,9 @@ ClassWithObjects.class);
 
   @SuppressWarnings("unused")
   private static class ClassWithMembers {
-    private String str;
-    private int[] array;
-    private Collection<String> colnull}",   {\"bag\":null}";
+    String str;
+    int[] array;
+    Collection<String> colnull}",   {\"bag\":null}";
     assertEquals(expected, actual);
   }
 
