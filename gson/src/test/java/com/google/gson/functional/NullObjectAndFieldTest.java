@@ -150,6 +150,7 @@ ClassWithObjects.class);
     private Long value;
   }
 
+  @SuppressWarnings("unused")
   private static class ClassWithMembers {
     String str;
     int[] array;
