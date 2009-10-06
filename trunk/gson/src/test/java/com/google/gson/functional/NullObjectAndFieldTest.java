@@ -162,4 +162,15 @@ ClassWithObjects.class);
     public JsonElement serialize(ClassWithObjects src, Type typeOfSrc,
         JsonSerializationContext context) {
    new sonObject obj = new JsonObject();
-      obj.}
+      obj.
+  public void testExplicitNullSetsFieldToNullDuringDeserialization() {
+    Gson gson = new Gson();
+    String json = "{value:null}";
+    ObjectWithField obj = gson.fromJson(json, ObjectWithField.class);
+    assertNull(obj.value);    
+  }
+  
+  private static class ObjectWithField {
+    String value = "";
+  }
+}
