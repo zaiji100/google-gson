@@ -196,7 +196,7 @@ ClassWithObjects.class);
         }).create();
     String json = "{value:'value1'}";
     ObjectWithField target = gson.fromJson(json, ObjectWithField.class);
-    assertFalse("value1".equals(target.value));
+    assertNull(target);
   }
 
   private static class ObjectWithField {
