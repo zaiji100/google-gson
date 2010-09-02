@@ -130,7 +130,7 @@ ClassWithObjects.class);
     gsonBuilder = new GsonBuilder();
     Gson gson = gsonBuilder.setPrettyPrinting().create();
     String result = gson.toJson(new ClassWithMembers());
-    assertEquals("{}\n", result);
+    assertEquals("{}", result);
 
     gson = gsonBuilder.serializeNulls().create();
     result = gson.toJson(new ClassWithMembers());
@@ -141,11 +141,11 @@ ClassWithObjects.class);
     gsonBuilder = new GsonBuilder();
     Gson gson = gsonBuilder.setPrettyPrinting().create();
     String result = gson.toJson(new String[] { "1", null, "3" });
-    assertEquals("[\"1\",null,\"3\"]\n", result);
+    assertEquals("[\"1\",null,\"3\"]", result);
 
     gson = gsonBuilder.serializeNulls().create();
     result = gson.toJson(new String[] { "1", null, "3" });
-    assertEquals("[\"1\",null,\"3\"]\n", result);
+    assertEquals("[\"1\",null,\"3\"]", result);
   }
 
   private static class ClassWithNullWrappedPrimitive {
