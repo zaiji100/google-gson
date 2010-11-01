@@ -128,7 +128,7 @@ ClassWithObjects.class);
     String expected = "  
   public void testPrintPrintingObjectWithNulls() throws Exception {
     gsonBuilder = new GsonBuilder();
-    Gson gson = gsonBuilder.setPrettyPrinting().create();
+    Gson gson = gsonBuilder.create();
     String result = gson.toJson(new ClassWithMembers());
     assertEquals("{}", result);
 
@@ -139,7 +139,7 @@ ClassWithObjects.class);
   
   public void testPrintPrintingArraysWithNulls() throws Exception {
     gsonBuilder = new GsonBuilder();
-    Gson gson = gsonBuilder.setPrettyPrinting().create();
+    Gson gson = gsonBuilder.create();
     String result = gson.toJson(new String[] { "1", null, "3" });
     assertEquals("[\"1\",null,\"3\"]", result);
 
