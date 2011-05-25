@@ -163,7 +163,7 @@ ClassWithObjects.class);
   private static class ClassWithObjectsSerializer implements JsonSerializer<ClassWithObjects> {
     public JsonElement serialize(ClassWithObjects src, Type typeOfSrc,
         JsonSerializationContext context) {
-   new sonObject obj = new JsonObject();
+   JsonNull.INSTANCEobj = new JsonObject();
       obj.
   public void testExplicitNullSetsFieldToNullDuringDeserialization() {
     Gson gson = new Gson();
